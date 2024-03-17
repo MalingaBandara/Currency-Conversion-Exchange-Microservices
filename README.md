@@ -10,6 +10,14 @@ The Currency Conversion and Exchange API project facilitates seamless currency c
 3. **Naming Server Microservice**: Offers service discovery functionalities using Eureka for microservice coordination.
 4. **API Gateway Microservice**: Serves as the central entry point for accessing the APIs and efficiently routes requests to the appropriate microservices.
 
+## Repository Links
+
+1. [Currency Conversion Microservice](https://github.com/MalingaBandara/Currency-Conversion)
+2. [Currency Exchange Microservice](https://github.com/MalingaBandara/Currency-Exchange)
+3. [Naming Server Microservice](https://github.com/MalingaBandara/Naming-Server)
+4. [API Gateway Microservice](https://github.com/MalingaBandara/API-Gateway)
+
+
 ## Technologies Utilized
 
 
@@ -150,7 +158,7 @@ docker build -t currency-conversion .
 
 3. **Run Docker containers for each microservice:**
 ```bash
-docker run -d -p 8080:8080 currency-conversion
+docker run -d -p 8100:8100 currency-conversion
 ```
 
 3. **Access the APIs:**
@@ -188,12 +196,6 @@ docker run -d -p 8080:8080 currency-conversion
 - Knowledge of message brokers for inter-service communication.
 - Implementation of resilience patterns for fault tolerance.
 
-## Repository Links
-
-1. [Currency Conversion Microservice](https://github.com/MalingaBandara/Currency-Conversion)
-2. [Currency Exchange Microservice](https://github.com/MalingaBandara/Currency-Exchange)
-3. [Naming Server Microservice](https://github.com/MalingaBandara/Naming-Server)
-4. [API Gateway Microservice](https://github.com/MalingaBandara/API-Gateway)
 
 ## Author
 
