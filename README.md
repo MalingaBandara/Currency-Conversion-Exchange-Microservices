@@ -146,7 +146,7 @@ networks:
 1. **Clone this repository:**
 
 ```bash
-git clone <main_repository_url>
+git clone https://github.com/MalingaBandara/Currency-Conversion-Exchange-Microservices
 
 ```
 
