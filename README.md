@@ -31,6 +31,16 @@ The Currency Conversion and Exchange API project facilitates seamless currency c
 - **RabbitMQ**: For asynchronous communication between microservices.
 - **Resilience4j**: Offering fault tolerance and resiliency to microservices.
 
+## Learnings
+
+- Understanding of microservices architecture and its benefits.
+- Implementation of service discovery using Eureka.
+- Experience with containerization and deployment using Docker.
+- Utilization of distributed tracing for monitoring and debugging.
+- Knowledge of message brokers for inter-service communication.
+- Implementation of resilience patterns for fault tolerance.
+
+
 ## Project Structure
 
 - `currency-conversion-microservice`: Source code for the currency conversion microservice.
@@ -186,15 +196,6 @@ docker run -d -p 8100:8100 currency-conversion
 - http://localhost:8765/currency-conversion/from/USD/to/INR/quantity/10
 - http://localhost:8765/currency-conversion-feign/from/USD/to/INR/quantity/10
 - http://localhost:8765/currency-conversion-new/from/USD/to/INR/quantity/10
-
-## Learnings
-
-- Understanding of microservices architecture and its benefits.
-- Implementation of service discovery using Eureka.
-- Experience with containerization and deployment using Docker.
-- Utilization of distributed tracing for monitoring and debugging.
-- Knowledge of message brokers for inter-service communication.
-- Implementation of resilience patterns for fault tolerance.
 
 
 ## Author
