@@ -1,0 +1,96 @@
+version: '3.7' #docker compose version
+
+services:
+    currency-exchange:  # docker currency exchange
+        image: bitlord00/mv2-currency-exchange-service:0.0.1-SNAPSHOT #image
+        mem_limit: 700m  # memory limit for each container
+        ports: 
+            - "8000:8000"    # expose port 8000 to the host machine and map it to port 8000 in the docker container
+        networks:
+            - currency-network #network to connect the service to on the host machine and other services in docker-compose fileformat 
+        depends_on:
+            - naming-server  # dependency to make sure that the naming server is ready before starting this service
+            - rabbitmq       # dependency to make sure RabbitMQ is ready before starting the service
+        environment:
+            EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka  # default eureka server address
+            SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/  # default Zipkin server address
+            # RabbitMQ Propertiesz
+            RABBIT_URI: amqp://guest:guest@rabbitmq:5672 # default RabbitMQ connection URL (With Username, Password and Port)
+            SPRING_RABBITMQ_HOST: rabbitmq               # default RabbitMQ Server hostname
+            SPRING_ZIPKIN_SENDER_TYPE: rabbit            # default zipkin sender type is rabbitmq, can be set to "http" or "kafka" 
+
+
+
+    currency-conversion:  # docker currency conversion service
+        image: bitlord00/mv2-currency-conversion-service:0.0.1-SNAPSHOT #image
+        mem_limit: 700m  # memory limit for each container
+        ports: 
+            - "8100:8100"   # expose port 8100 to the host machine and map it to port 8100 in the docker container
+        networks:
+            - currency-network #network to connect the service to on the host machine and other services in docker-compose fileformat 
+        depends_on:
+            - naming-server  # dependency to make sure that the naming server is ready before starting this service
+            - rabbitmq       # dependency to make sure RabbitMQ is ready before starting the service
+        environment:
+            EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka  # default eureka server address
+            SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/  # default Zipkin server address
+
+
+
+    api-gateway:  # API gateway server
+        image: bitlord00/mv2-api-gateway:0.0.1-SNAPSHOT #image
+        mem_limit: 700m  # memory limit for each container
+        ports: 
+            - "8765:8765"   # expose port 8765 to the host machine and map it to port 8765 in the docker container
+        networks:
+            - currency-network #network to connect the service to on the host machine and other services in docker-compose fileformat 
+        depends_on:
+            - naming-server  # dependency to make sure that the naming server is ready before starting this service
+            - rabbitmq       # dependency to make sure RabbitMQ is ready before starting the service
+        environment:
+            EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka  # default eureka server address
+            SPRING.ZIPKIN.BASEURL: http://zipkin-server:9411/  # default Zipkin server address
+
+
+
+    naming-server: # docker naming server
+        image: bitlord00/mv2-naming-server:0.0.1-SNAPSHOT #image
+        mem_limit: 700m  # memory limit for each container
+        ports: 
+            - "8761:8761"    # expose port 8761 to the host machine and map it to port 8761 of the container
+        networks:
+            - currency-network #network to connect the service to on the host machine and other services in docker-compose fileformat 
+
+
+
+# docker run -p 9411:9411  openzipkin/zipkin:2.23
+
+    zipkin-server: # docker zipkin server 
+        image: openzipkin/zipkin:2.23 #image
+        mem_limit: 300m  # memory limit for each container
+        ports: 
+            - "9411:9411"    # expose port 9411 to the host machine and map it to port 9411 of the container
+        networks:
+            - currency-network #network to connect the service to on the host machine and other services in docker-compose fileformat
+        depends_on:
+            - rabbitmq       # dependency to make sure RabbitMQ is ready before starting the service 
+        restart: always #Restart if there is a problem starting up
+        environment:
+        # RabbitMQ Properties
+            RABBIT_URI: amqp://guest:guest@rabbitmq:5672 # default RabbitMQ connection URL (With Username, Password and Port)
+
+
+    rabbitmq:   # RabbitMQ Server
+        image: rabbitmq:3.8.12-management #image
+        mem_limit: 300m  # memory limit for each container
+        ports: 
+            - "5672:5672"      # expose port 5672 to the host machine and map it to port 5672 of the container
+            - "15672:15672"    # expose port 15672 to the host machine and map it to port 15672 of the container
+        networks:
+            - currency-network #network to connect the service to on the host machine and other services in docker-compose fileformat 
+
+
+
+# Create a network called "currency-network" that containers can communicate with each other on
+networks:
+    currency-network:
