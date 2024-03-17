@@ -1,21 +1,27 @@
 # Currency Conversion and Exchange API with Microservices
+This project leverages Spring Boot, Microservices architecture, Cloud computing, and Docker for implementing a Currency Conversion and Exchange API. It comprises several microservices designed to handle currency-related operations efficiently.
 
-This project demonstrates the development of a currency conversion and exchange API using Java Spring Boot Cloud with microservices architecture deployed with Docker. The project is split into four microservices:
+## Overview
 
-1. **Currency Conversion Microservice**: Responsible for converting currency.
-2. **Currency Exchange Microservice**: Handles currency exchange operations.
-3. **Naming Server Microservice**: Provides service discovery using Eureka.
-4. **API Gateway Microservice**: Serves as the entry point for accessing the API.
+The Currency Conversion and Exchange API project facilitates seamless currency conversion and exchange operations. It comprises the following microservices:
 
-## Technologies Used
+1. **Currency Conversion Microservice**: Converts currencies based on provided exchange rates.
+2. **Currency Exchange Microservice**: Executes currency exchange operations utilizing the available exchange rates.
+3. **Naming Server Microservice**: Offers service discovery functionalities using Eureka for microservice coordination.
+4. **API Gateway Microservice**: Serves as the central entry point for accessing the APIs and efficiently routes requests to the appropriate microservices.
 
-- **Java Spring Boot Cloud**: Framework for building microservices.
-- **Docker**: Used for containerization and deployment.
-- **Eureka**: Service discovery tool.
-- **Zipkin**: Distributed tracing system.
-- **H2 Database**: In-memory database for development.
-- **RabbitMQ**: Message broker for communication between microservices.
-- **Resilience4j**: Library for implementing resilience patterns.
+## Technologies Utilized
+
+
+- **Spring Boot**: For rapid development of microservices.
+- **Microservices Architecture**: For scalability, resilience, and maintainability.
+- **Cloud Computing**: Utilized for deployment, offering scalability and accessibility.
+- **Docker**: Used for containerization, ensuring consistency across various environments.
+- **Eureka**: For service discovery and registration.
+- **Zipkin**: Providing distributed tracing capabilities.
+- **H2 Database**: Used for storing exchange rates data.
+- **RabbitMQ**: For asynchronous communication between microservices.
+- **Resilience4j**: Offering fault tolerance and resiliency to microservices.
 
 ## Project Structure
 
