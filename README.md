@@ -1,25 +1,23 @@
+
 # Currency Conversion and Exchange API with Microservices
+
 This project leverages Spring Boot, Microservices architecture, Cloud computing, and Docker for implementing a Currency Conversion and Exchange API. It comprises several microservices designed to handle currency-related operations efficiently.
 
-## Overview
 
-The Currency Conversion and Exchange API project facilitates seamless currency conversion and exchange operations. It comprises the following microservices:
+## Project Overview
 
-1. **Currency Conversion Microservice**: Converts currencies based on provided exchange rates.
-2. **Currency Exchange Microservice**: Executes currency exchange operations utilizing the available exchange rates.
-3. **Naming Server Microservice**: Offers service discovery functionalities using Eureka for microservice coordination.
-4. **API Gateway Microservice**: Serves as the central entry point for accessing the APIs and efficiently routes requests to the appropriate microservices.
+This project leverages Spring Boot, microservices architecture, cloud computing, and Docker for implementing a currency conversion and exchange API. The application is composed of multiple microservices that handle different aspects of the currency conversion and exchange process, including service discovery, load balancing, and request routing. It demonstrates a robust, scalable, and resilient microservices architecture.
 
-## Repository Links
+## Key Features
 
-1. [Currency Conversion Microservice](https://github.com/MalingaBandara/Currency-Conversion)
-2. [Currency Exchange Microservice](https://github.com/MalingaBandara/Currency-Exchange)
-3. [Naming Server Microservice](https://github.com/MalingaBandara/Naming-Server)
-4. [API Gateway Microservice](https://github.com/MalingaBandara/API-Gateway)
+- Currency conversion and exchange operations.
+- Service discovery with Eureka for seamless microservices coordination.
+- Centralized API Gateway for request routing and load balancing.
+- Distributed tracing with Zipkin for monitoring inter-service communication.
+- Asynchronous communication using RabbitMQ.
+- Dockerized deployment for consistency across environments.
 
-
-## Technologies Utilized
-
+## Technologies Used
 
 - **Spring Boot**: For rapid development of microservices.
 - **Microservices Architecture**: For scalability, resilience, and maintainability.
@@ -31,6 +29,20 @@ The Currency Conversion and Exchange API project facilitates seamless currency c
 - **RabbitMQ**: For asynchronous communication between microservices.
 - **Resilience4j**: Offering fault tolerance and resiliency to microservices.
 
+## Microservices Overview
+
+1. **Currency Conversion Microservice**: Handles currency conversion based on exchange rates.
+2. **Currency Exchange Microservice**: Executes currency exchange operations.
+3. **Naming Server (Eureka)**: Manages service discovery and registration.
+4. **API Gateway**: Centralized entry point for routing and load balancing across microservices.
+
+## Repository Links
+
+1. [Currency Conversion Microservice](https://github.com/MalingaBandara/Currency-Conversion)
+2. [Currency Exchange Microservice](https://github.com/MalingaBandara/Currency-Exchange)
+3. [Naming Server Microservice](https://github.com/MalingaBandara/Naming-Server)
+4. [API Gateway Microservice](https://github.com/MalingaBandara/API-Gateway)
+
 ## Learnings
 
 - Understanding of microservices architecture and its benefits.
@@ -40,14 +52,52 @@ The Currency Conversion and Exchange API project facilitates seamless currency c
 - Knowledge of message brokers for inter-service communication.
 - Implementation of resilience patterns for fault tolerance.
 
+## Project Structure and Code Explanation
 
-## Project Structure
+1. **Microservice Configuration**:
+   - Each microservice is configured with Spring Boot and registered with Eureka for dynamic discovery.
+   - Example YAML configuration:
+   ```yaml
+   spring:
+     cloud:
+       gateway:
+         routes:
+           - id: currency-conversion
+             uri: lb://CURRENCY-CONVERSION
+             predicates:
+               - Path=/currency-conversion/**
+   ```
 
-- `currency-conversion-microservice`: Source code for the currency conversion microservice.
-- `currency-exchange-microservice`: Source code for the currency exchange microservice.
-- `naming-server-microservice`: Source code for the naming server microservice.
-- `api-gateway-microservice`: Source code for the API gateway microservice.
+2. **Service Communication**:
+   - Microservices communicate asynchronously using RabbitMQ, enhancing resilience and decoupling.
+   - Zipkin provides distributed tracing for monitoring and debugging communication between services.
 
+3. **Docker Compose Setup**:
+   - The entire setup is containerized using Docker Compose for seamless orchestration.
+   ```yaml
+   version: '3.7'
+   services:
+     currency-exchange:
+       image: currency-exchange-service
+       ports:
+         - "8000:8000"
+       networks:
+         - currency-network
+       depends_on:
+         - naming-server
+   ```
+
+## Commits and Project Evolution
+
+1. **Initial Setup**: Created the project structure and configured Spring Boot dependencies.
+2. **Microservices Implementation**: Developed currency conversion and exchange microservices.
+3. **Service Discovery and Gateway**: Integrated Eureka and Spring Cloud Gateway.
+4. **Docker and Asynchronous Communication**: Added Docker support and RabbitMQ for messaging.
+
+
+## Learnings and Future Enhancements
+
+This project helped deepen my understanding of microservices architecture, service discovery, containerization, and resilience patterns. Future enhancements may include adding OAuth2 security, implementing circuit breakers with Resilience4j, and incorporating advanced monitoring tools.
 
 ## Docker Compose Configuration
 
@@ -202,3 +252,7 @@ docker run -d -p 8100:8100 currency-conversion
 
 - [Malinga Bandara](https://github.com/MalingaBandara)
 
+
+## License
+
+This project is licensed under the MIT License.
