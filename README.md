@@ -8,6 +8,24 @@ This project leverages Spring Boot, Microservices architecture, Cloud computing,
 
 This project leverages Spring Boot, microservices architecture, cloud computing, and Docker for implementing a currency conversion and exchange API. The application is composed of multiple microservices that handle different aspects of the currency conversion and exchange process, including service discovery, load balancing, and request routing. It demonstrates a robust, scalable, and resilient microservices architecture.
 
+
+## 🏗 System Architecture Diagram
+
+This diagram shows how the microservices interact with each other using Eureka for service discovery and API Gateway for centralized routing.
+
+<p align="center">
+  <img src="https://github.com/MalingaBandara/Currency-Conversion-Exchange-Microservices/blob/main/Diagrams/SystemArchitecture(ComponentDiagram).png" alt="Microservices Architecture Diagram" width="800"/>
+</p>
+
+## 🔄 Currency Conversion Flow (Sequence Diagram)
+
+The following sequence diagram explains how a currency conversion request flows through the system.
+
+<p align="center">
+  <img src="https://github.com/MalingaBandara/Currency-Conversion-Exchange-Microservices/blob/main/Diagrams/SequenceDiagram(ConversionFlow).png" alt="Currency Conversion Sequence Diagram" width="800"/>
+</p>
+
+
 ## Key Features
 
 - Currency conversion and exchange operations.
